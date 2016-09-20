@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>task2--</title>
+	<script type="text/javascript">
+		var fruits=[];
+		fruits[5]='mango'
+		/*console.log(fruits[5]);
+		console.log(Object.keys(fruits));
+
+		console.log(typeof Symbol()==='symbol')*/
+
+		//判断是否为数组
+		function isArray(arr){
+			return Object.prototype.toString.call(arr)=='[object Array]';
+		}
+		//console.log(isArray(fruits))
+
+		//判断是否为函数
+		function isFunction(fn){
+			return typeof(fn) =='function';
+		}
+
+		/*var a=function(){}
+		var b='aa'
+		console.log(isFunction(a))
+		console.log(isFunction(b))*/
+
+		//使用递归来实现一个深度克隆，可以复制一个目标对象，返回一个完整拷贝
+		//被复制的对象类型会被限制为数字、字符串、布尔、日期、数组、objec对象。不会包含函数、正则对象等
+		
+		function cloneObject(src){
+			var newSrc=newSrc||{};
+			/*if(Object.prototype.toString.call(src)=='[object Array]'){
+				newSrc=[]
+			}else{
+				newSrc={};
+			}*/
+			for(var i in src){
+				if(src.hasOwnProperty(i)){//排除继承属性
+					if(typeof src[i]==='object'){
+						newSrc[i]=cloneObject(src[i]);//递归赋值
+					}else{
+						newSrc[i]=src[i];
+					}
+				}
+			}
+
+			return newSrc;
+		}
+
+/*
+		var srcObj = {
+		    a: 1,
+		    b: {
+		        b1: ["hello", "hi"],
+		        b2: "JavaScript"
+		    }
+		};
+		var abObj = srcObj;
+		var tarObj = cloneObject(srcObj);
+
+		srcObj.a = 2;
+		srcObj.b.b1[0] = "Hello";
+
+		console.log(abObj.a);
+		console.log(abObj.b.b1[0]);
+
+		console.log(tarObj.a);     
+		console.log(tarObj.b.b1[0]);   
+*/
+	
+	function uniqArray(arr){
+		var newArr=[];
+		for(var i in arr){
+			if(newArr.indexOf(arr[i])==-1){
+				newArr.push(arr[i])
+			}
+		}
+		return newArr;
+	}	
+
+	// 使用示例
+var a = [1, 3, 5, 7, 5, 3];
+var b = uniqArray(a);
+console.log(a);
+console.log(b); // [1, 3, 5, 7]
+
+	</script>
+</head>
+<body>
+
+</body>
+</html>
